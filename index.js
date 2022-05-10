@@ -56,9 +56,9 @@ app.post('/create-user', (req, res)=>{
     })
 })
 //update
-app.put('/update', (req, res)=>{
-    console.log(req.body)
-    const {id, username, password, email} = req.body
+app.put('/update/:userId', (req, res)=>{
+   const id = req.params.userId
+    const { username, password, email} = req.body
     let sql = `update userinfo set username = '${username}' , password = '${password}' , email = '${email}' where id = ${id} `
 
     dbConnection.query(sql, (err, result)=>{
@@ -73,9 +73,8 @@ app.put('/update', (req, res)=>{
 })
 
 //delete
-app.delete('/delete', (req, res)=>{
-    console.log(req.body)
-    const {id}=  {body}
+app.delete('/delete/:userId', (req, res)=>{
+    const id=  req.params.userId
     let sql = `delete  from userinfo where id = ${id} `
 
     dbConnection.query(sql, (err, result)=>{
